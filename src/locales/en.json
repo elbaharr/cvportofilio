@@ -1,0 +1,94 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact Me"
+  },
+  "hero": {
+    "hello": "Hello, I'm",
+    "name": "Abdelrahman",
+    "surname": "Elbahar",
+    "role1": "Front-End Developer",
+    "role2": "Graphic Designer",
+    "description": "I combine a solid academic background in Information Systems with hands-on experience in building websites, managing student platforms, and delivering technical content. I am passionate about creating innovative digital solutions and enhancing user experiences.",
+    "downloadCV": "Download CV"
+  },
+  "about": {
+    "title": "About",
+    "highlight": "Me",
+    "personalProfile": "Personal Profile",
+    "profileText": "As a Front-End Developer, I combine a solid academic background in Information Systems with hands-on experience in building websites, managing student platforms, and delivering technical content. I am eager to contribute to innovative projects, enhance user experiences, and continue improving my technical and creative capabilities.",
+    "born": "Born: 04 / 01 / 2003",
+    "location": "El-Fayoum City, Egypt",
+    "education": "Education",
+    "degree": "Bachelor's Degree in Information Systems",
+    "university": "New Cairo Academy – Faculty of Computer Science",
+    "grade": "Grade: Very Good",
+    "eduPoint1": "Studied core subjects in computer science, programming, and database systems.",
+    "eduPoint2": "Participated in technical training and team projects.",
+    "eduPoint3": "Educational content creation for student platforms."
+  },
+  "skills": {
+    "title": "My",
+    "highlight": "Skills",
+    "frontend": "Front-End Development",
+    "frontendDesc": "HTML / CSS / JavaScript / Responsive Design / UI/UX Concepts",
+    "tools": "Tools & Technologies",
+    "toolsDesc": "Git / GitHub / Microsoft Office / VS Code",
+    "soft": "Soft Skills",
+    "softDesc": "Project Management / Team Leadership / Public Speaking / Content Creation",
+    "certifications": "Certifications",
+    "cert1": "Front-End Development Diploma",
+    "cert1Desc": "Route Academy - 2024",
+    "cert2": "React.js Fundamentals",
+    "cert2Desc": "Udemy - 2024"
+  },
+  "projects": {
+    "title": "Featured",
+    "highlight": "Projects",
+    "viewProject": "View Project",
+    "viewCode": "View Code",
+    "project1Title": "E-Commerce Platform",
+    "project1Desc": "A full-featured e-commerce website with shopping cart and payment integration.",
+    "project2Title": "Student Portal",
+    "project2Desc": "Educational platform for students with courses and assignments.",
+    "project3Title": "Portfolio Website",
+    "project3Desc": "Personal portfolio showcasing projects and skills."
+  },
+  "experience": {
+    "title": "Work",
+    "highlight": "Experience",
+    "job1Title": "Front-End Developer",
+    "job1Company": "Freelance",
+    "job1Period": "2023 - Present",
+    "job1Point1": "Building responsive websites and web applications",
+    "job1Point2": "Implementing modern UI/UX designs",
+    "job2Title": "Content Creator",
+    "job2Company": "Tech Education Platform",
+    "job2Period": "2022 - 2023",
+    "job2Point1": "Creating technical educational content",
+    "job2Point2": "Managing student community platforms"
+  },
+  "contact": {
+    "title": "Get In",
+    "highlight": "Touch",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again.",
+    "infoTitle": "Contact Information",
+    "infoText": "Feel free to reach out to me for any questions or opportunities. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.",
+    "location": "El-Fayoum City, Egypt",
+    "availability": "Available for freelance work"
+  },
+  "footer": {
+    "copyright": "© 2026 Abdelrahman Elbahar. All rights reserved.",
+    "designedBy": "Designed & Built with"
+  }
+}

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg-color: #020617;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --card-bg: rgba(255, 255, 255, 0.12);
+  --border-color: rgba(255, 255, 255, 0.15);
+  --blob-opacity: 0.2;
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.light {
+  --bg-color: #f5f3ef; /* Warm cream/beige background */
+  --text-main: #3e2723; /* Dark brown text */
+  --text-muted: #6d4c41; /* Medium brown muted text */
+  --card-bg: rgba(141, 110, 99, 0.35); /* Darker brown translucent card bg */
+  --border-color: rgba(141, 110, 99, 0.3); /* Brown border */
+  --blob-opacity: 0.1;
+  --shadow: 0 8px 32px 0 rgba(141, 110, 99, 0.2);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[dir="rtl"] {
+  font-family: 'Tajawal', sans-serif;
+}
+
+.glass-effect {
+  background-color: var(--card-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* iOS-style smooth corners */
+.ios-rounded {
+  border-radius: 2.5rem; /* ~40px */
+}
+
+.ios-card-rounded {
+  border-radius: 2rem; /* ~32px */
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 5s ease infinite;
+}
