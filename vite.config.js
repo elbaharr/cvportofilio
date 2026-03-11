@@ -5,5 +5,5 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/cvportofilio/", // تمت إضافة هذا السطر ليتطابق مع اسم المستودع
+  base: "/", 
 });
