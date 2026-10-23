@@ -5,167 +5,133 @@ import { useTranslation } from "react-i18next";
 
 function Navbar() {
   const { t, i18n } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+  const [isOpen,    setIsOpen]    = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [dark,      setDark]      = useState(true);
+  const [lang,      setLang]      = useState(i18n.language);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("light");
-    } else {
-      document.documentElement.classList.add("light");
-    }
-  }, [isDarkMode]);
+    document.documentElement.classList.toggle("light", !dark);
+  }, [dark]);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    document.body.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
 
   useEffect(() => {
-    document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
-  }, [currentLanguage]);
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  }, [lang]);
 
-  const toggleLanguage = () => {
-    const newLang = currentLanguage === 'en' ? 'ar' : 'en';
-    i18n.changeLanguage(newLang);
-    setCurrentLanguage(newLang);
+  const toggleLang = () => {
+    const next = lang === "en" ? "ar" : "en";
+    i18n.changeLanguage(next);
+    window.localStorage.setItem("i18nextLng", next);
+    setLang(next);
   };
 
-  const NavbarLinks = [
-    { id: 1, name: t("navbar.home"), link: "#home" },
-    { id: 2, name: t("navbar.about"), link: "#about" },
-    { id: 3, name: t("navbar.skills"), link: "#skills" },
-    { id: 4, name: t("navbar.projects"), link: "#projects" },
-    { id: 5, name: t("navbar.experience"), link: "#experience" },
+  const links = [
+    { name: t("navbar.home"),       href: "#home"       },
+    { name: t("navbar.about"),      href: "#about"      },
+    { name: t("navbar.skills"),     href: "#skills"     },
+    { name: t("navbar.projects"),   href: "#projects"   },
+    { name: t("navbar.experience"), href: "#experience" },
   ];
 
   return (
-    <header
-      className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "glass-effect shadow-2xl ios-rounded py-3"
+    <>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "glass-effect border-b border-[var(--border)] py-3"
           : "bg-transparent py-5"
-      }`}
-    >
-      <div className="container mx-auto flex items-center justify-between px-6 md:px-12 text-[var(--text-main)]">
-        <motion.a
-          href="#home"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="text-3xl font-black tracking-tighter"
-        >
-          ELBAHAR<span className="text-blue-500">.</span>
-        </motion.a>
+      }`}>
+        <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
 
-        <nav className="hidden md:flex items-center space-x-8">
-          {NavbarLinks.map((link, index) => (
-            <motion.a
-              key={link.id}
-              href={link.link}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="relative text-sm font-medium uppercase tracking-widest hover:text-blue-500 transition-colors group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-            </motion.a>
-          ))}
-          
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={toggleLanguage}
-            className="p-2 glass-effect rounded-xl text-blue-500 font-bold text-sm"
-          >
-            {currentLanguage === 'en' ? 'ع' : 'En'}
-          </motion.button>
-
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2 glass-effect rounded-xl text-blue-500"
-          >
-            {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-          </motion.button>
-
-          <motion.a
-            href="#contact"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="glass-effect px-6 py-2 rounded-full text-sm font-bold border border-[var(--border-color)] hover:bg-blue-500 hover:text-white transition-all shadow-lg"
-          >
-            {t("navbar.contact")}
+          {/* Logo */}
+          <motion.a href="#home" initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}}
+            className="text-xl font-black tracking-tighter text-[var(--text)]">
+            ELBAHAR<span className="text-indigo-500">.</span>
           </motion.a>
-        </nav>
 
-        <div className="flex items-center space-x-4 md:hidden">
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={toggleLanguage}
-            className="p-2 glass-effect rounded-xl text-blue-500 font-bold text-sm"
-          >
-            {currentLanguage === 'en' ? 'ع' : 'En'}
-          </motion.button>
-          <button
-            className="p-2 glass-effect rounded-xl text-blue-500"
-            onClick={() => setIsDarkMode(!isDarkMode)}
-          >
-            {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-          </button>
-          <button
-            className="p-2 glass-effect rounded-xl text-[var(--text-main)]"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </button>
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-1">
+            {links.map((link, i) => (
+              <motion.a key={i} href={link.href}
+                initial={{opacity:0,y:-8}} animate={{opacity:1,y:0}} transition={{delay: i * 0.07}}
+                className="relative px-4 py-2 text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text)] rounded-lg hover:bg-white/5 transition-all group">
+                {link.name}
+                <span className="absolute bottom-1 left-4 right-4 h-px bg-indigo-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              </motion.a>
+            ))}
+          </nav>
+
+          {/* Controls */}
+          <div className="hidden md:flex items-center gap-2">
+            <button onClick={toggleLang}
+              className="px-3 py-1.5 text-xs font-bold rounded-lg text-indigo-400 border border-indigo-500/25 hover:bg-indigo-500/10 transition-all">
+              {lang === "en" ? "ع" : "En"}
+            </button>
+            <button onClick={() => setDark(!dark)}
+              className="w-9 h-9 flex items-center justify-center rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-white/5 transition-all">
+              {dark ? <FiSun size={16}/> : <FiMoon size={16}/>}
+            </button>
+            <a href="#contact"
+              className="px-5 py-2 text-xs font-bold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_16px_rgba(99,102,241,0.3)] hover:shadow-[0_0_24px_rgba(99,102,241,0.45)]">
+              {t("navbar.contact")}
+            </a>
+          </div>
+
+          {/* Mobile controls */}
+          <div className="flex md:hidden items-center gap-2">
+            <button onClick={toggleLang}
+              className="px-3 py-1.5 text-xs font-bold rounded-lg text-indigo-400 border border-indigo-500/25">
+              {lang === "en" ? "ع" : "En"}
+            </button>
+            <button onClick={() => setDark(!dark)}
+              className="w-9 h-9 flex items-center justify-center rounded-lg text-[var(--text-muted)] border border-[var(--border)]">
+              {dark ? <FiSun size={16}/> : <FiMoon size={16}/>}
+            </button>
+            <button onClick={() => setIsOpen(!isOpen)}
+              className="w-9 h-9 flex items-center justify-center rounded-lg text-[var(--text)] border border-[var(--border)] hover:bg-white/5 transition-all">
+              {isOpen ? <FiX size={18}/> : <FiMenu size={18}/>}
+            </button>
+          </div>
+
         </div>
-      </div>
+      </header>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "100vh" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="fixed inset-0 bg-[var(--bg-color)] backdrop-blur-2xl z-40 flex flex-col items-center justify-center space-y-8 md:hidden"
-          >
-            {NavbarLinks.map((link) => (
-              <motion.a
-                key={link.id}
-                href={link.link}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-2xl font-bold tracking-widest hover:text-blue-500 transition-colors text-[var(--text-main)]"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
+            initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
+            className="fixed inset-0 z-40 md:hidden"
+            style={{background:"rgba(3,7,18,0.97)", backdropFilter:"blur(20px)"}}>
+            <div className="flex flex-col items-center justify-center h-full gap-6">
+              {links.map((link, i) => (
+                <motion.a key={i} href={link.href}
+                  initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:i*0.06}}
+                  onClick={()=>setIsOpen(false)}
+                  className="text-2xl font-bold text-[var(--text)] hover:text-indigo-400 transition-colors tracking-tight">
+                  {link.name}
+                </motion.a>
+              ))}
+              <motion.a href="#contact"
+                initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:links.length*0.06}}
+                onClick={()=>setIsOpen(false)}
+                className="mt-4 px-10 py-3.5 rounded-xl bg-indigo-600 text-white font-bold text-sm">
+                {t("navbar.contact")}
               </motion.a>
-            ))}
-            <a
-              href="#contact"
-              className="px-10 py-4 glass-effect rounded-full text-xl font-bold border border-[var(--border-color)] text-[var(--text-main)]"
-              onClick={() => setIsOpen(false)}
-            >
-              {t("navbar.contact")}
-            </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
 

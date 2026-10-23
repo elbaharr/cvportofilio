@@ -3,6 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import en from './locales/en.json';
 import ar from './locales/ar.json';
 
+const savedLang = typeof window !== "undefined" ? window.localStorage.getItem("i18nextLng") : null;
+
 i18n
   .use(initReactI18next)
   .init({
@@ -10,8 +12,8 @@ i18n
       en: { translation: en },
       ar: { translation: ar }
     },
-    lng: 'en',
-    fallbackLng: 'en',
+    lng: savedLang === "ar" ? "ar" : "en",
+    fallbackLng: "en",
     interpolation: {
       escapeValue: false
     }
